@@ -9,9 +9,8 @@
     <thead class="thead-inverse">
       <tr>
         <th>Category</th>
-        <th>Replies</th>
-        <th>Topics</th>
-        <th>Last Post</th>
+        <th>Ibibazo Byabajijwe</th>
+        <th>Ibisubizo Byatanzwe</th>
       </tr>
     </thead>
     <tbody>
@@ -21,26 +20,14 @@
             <a href="{% url 'category_topics' board.pk %}">{{ board.name }}</a>
             <small class="text-muted d-block">{{ board.description }}</small>
           </td>
-          <td class="align-middle">
-            {{ board.get_posts_count }}
-          </td>
+          
           <td class="align-middle">
             {{ board.topics.count }}
           </td>
           <td class="align-middle">
-            {% with post=board.get_last_post %}
-  {% if post %}
-    <small>
-      <a href="{% url 'topic_posts' board.pk post.topic.pk %}">
-        By {{ post.created_by.username }} at {{ post.created_at }}
-      </a>
-    </small>
-  {% else %}
-    <small class="text-muted">
-      <em>No posts yet.</em>
-    </small>
-  {% endif %}
-{% endwith %}
+            {{ board.get_posts_count }}
+          </td>
+          
         </tr>
       {% endfor %}
     </tbody>

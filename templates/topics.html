@@ -12,7 +12,7 @@
 {% block content %}
 
 <div class="mb-4">
-    <a href="{% url 'new_topic' cat.pk %}" class="btn btn-primary">New topic</a>
+    <a href="{% url 'new_topic' cat.pk %}" class="btn btn-primary">Baza Ikibazo </a>
   </div>
 
 
@@ -20,11 +20,10 @@
     <table class="table">
     <thead class="thead-inverse">
       <tr>
-        <th>Topic</th>
-        <th>Starter</th>
-        <th>Replies</th>
+        <th>Ikibazo</th>
+        <th>Uwakibajije</th>
+        <th>Ibisubizo</th>
         <th>Views</th>
-        <th>Last Update</th>
       </tr>
     </thead>
     <tbody>
@@ -34,7 +33,6 @@
     <td>{{ topic.starter.username }}</td>
     <td>{{ topic.number_of_replies }}</td>
     <td>{{ topic.views }}</td>
-    <td>{{ topic.last_updated }}</td>
   </tr>
 {% endfor %}
     </tbody>

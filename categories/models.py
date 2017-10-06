@@ -20,7 +20,7 @@ class Category(models.Model):
 
 
 class Topic(models.Model):
-    subject = models.CharField(max_length=255)
+    subject = models.TextField(max_length=1000)
     last_updated = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, related_name='topics')
     starter = models.ForeignKey(User, related_name='topics')
@@ -32,7 +32,7 @@ class Topic(models.Model):
 
 
 class Reply(models.Model):
-    message = models.TextField(max_length=4000)
+    message = models.TextField(max_length=40000)
     topic = models.ForeignKey(Topic, related_name='replies')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)

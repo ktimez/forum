@@ -31,11 +31,11 @@ def new_topic(request, pk):
             topic.category = cat
             topic.starter = user
             topic.save()
-            Reply.objects.create(
+            '''Reply.objects.create(
                 message=form.cleaned_data.get('message'),
                 topic=topic,
                 created_by=user
-            )
+            )'''
 
             return redirect('topic_posts',pk=pk, topic_pk=topic.pk)
 
