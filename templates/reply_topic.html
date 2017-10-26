@@ -7,18 +7,21 @@
 {% block breadcrumb %}
   <li class="breadcrumb-item"><a href="{% url 'home' %}">Category</a></li>
   <li class="breadcrumb-item"><a href="{% url 'category_topics' topic.category.pk %}">{{ topic.category.name }}</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'topic_posts' topic.category.pk topic.pk %}">{{ topic.subject }}</a></li>
-  <li class="breadcrumb-item active">Musubize</li>
+  
 {% endblock %}
 
 {% block content %}
-
+<h4> {{ topic.subject }} </h4>
+<br>
   <form method="post" class="mb-4">
     {% csrf_token %}
     {% include 'includes/form.html' %}
     <button type="submit" class="btn btn-success">Subiza</button>
   </form>
-
+  <br>
+  {% if topic.replies.all %}
+    <h5><b><i> <u> Ibindi bisubizo bimaze gutangwa</u> </i></b></h5>
+  {% endif %}
   {% for post in topic.replies.all %}
     <div class="card mb-2">
       <div class="card-body p-3">

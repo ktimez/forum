@@ -15,13 +15,46 @@
     <a href="{% url 'new_topic' cat.pk %}" class="btn btn-primary">Baza Ikibazo </a>
   </div>
 
+<br>
+<h4>Ibibazo biherutse kubazwa </h4>
+<br>
 
 
+<div class="container" >
+  {% for topic in topics %}
+  
+  <div class="card mb-2">
+      <div class="card-body ">
+        <a href="{% url 'topic_posts' cat.pk topic.pk %}">{{ topic.subject }}</a>
+        <div class="row">
+          <div class="col-6">
+            <small class="text-muted">cyabajijwe na: {{ topic.starter.username }}</small>
+          </div>
+
+          <div class="col-6 text-right">
+            <small class="text-muted">ibisubizo: {{ topic.number_of_replies }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  {% endfor %}
+
+
+</div>
+
+
+
+
+
+
+
+<!--
     <table class="table">
     <thead class="thead-inverse">
       <tr>
         <th>Ikibazo</th>
-        <th>Uwakibajije</th>
+        <th>Uwabajije</th>
         <th>Ibisubizo</th>
         <th>Views</th>
       </tr>
@@ -36,5 +69,5 @@
   </tr>
 {% endfor %}
     </tbody>
-  </table>
+  </table> -->
 {% endblock %}
