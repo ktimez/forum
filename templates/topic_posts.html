@@ -21,8 +21,10 @@
     <a href="{% url 'reply_topic' topic.category.pk topic.pk %}" class="btn btn-primary" role="button">Mufashe umuhe igisubizo</a>
   </div>
   <br>
-
+  {% if topic.replies.all %}
     <h5><b><i><u>mu Bisubizo Bimaze Gutangwa </u></b></i></h5>
+  {% endif %}
+    
   {% for post in topic.replies.all %}
     <div class="card mb-2 ">
       <div class="card-body p-3">
@@ -38,11 +40,11 @@
               </div>
             </div>
             {{ post.message }}
-            {% if post.created_by == user %}
+            <!--{% if post.created_by == user %}
               <div class="mt-3">
-                <a href="#" class="btn btn-primary btn-sm" role="button">Kosora</a>
+                <a href="{% url 'edit_post' post.topic.category.pk post.topic.pk post.id %}" class="btn btn-primary btn-sm" role="button">Kosora</a>
               </div>
-            {% endif %}
+            {% endif %} -->
           </div>
         </div>
       </div>

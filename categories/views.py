@@ -1,12 +1,13 @@
 from django.shortcuts import render , get_object_or_404, redirect
-#from django.http import HttpResponse
-#from django.http import Http404
+from django.utils.decorators import method_decorator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Category, Topic, Reply
 from django.contrib.auth.models import User
 from .forms import NewTopicForm, PostForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-# Create your views here.
+from django.views.generic import UpdateView
+from django.utils import timezone
 
 def home(request):
     cats = Category.objects.all()
@@ -47,6 +48,7 @@ def new_topic(request, pk):
 
 def topic_posts(request, pk, topic_pk):
     topic = get_object_or_404(Topic, category__pk=pk, pk=topic_pk)
+
     topic.views +=1
     topic.save()
     return render(request, 'topic_posts.html', {'topic': topic})
@@ -61,7 +63,33 @@ def reply_topic(request, pk, topic_pk):
             reply.topic = topic
             reply.created_by = request.user
             reply.save()
+
+
+            reply.last_updated = timezone.now()  # <- here
+            reply.save()                         # <- and here
+
+
             return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
     else:
         form = PostForm()
     return render(request, 'reply_topic.html', {'topic': topic, 'form': form})
+
+
+@method_decorator(login_required, name='dispatch')
+class PostUpdateView(UpdateView):
+    model = Reply
+    fields = ('message', )
+    template_name = 'edit_post.html'
+    pk_url_kwarg = 'topic_pk'
+    context_object_name = 'post'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(created_by=self.request.user)
+
+    def form_valid(self, form):
+        reply = form.save(commit=False)
+        reply.updated_by = self.request.user
+        reply.updated_at = timezone.now()
+        reply.save()
+        return redirect('topic_posts', pk=reply.topic.category.pk, topic_pk=reply.topic.pk)
