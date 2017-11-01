@@ -9,8 +9,8 @@
     <thead class="thead-inverse">
       <tr>
         <th>Category</th>
-        <th>Ibibazo Byabajijwe</th>
-        <!--<th>Ibisubizo Byatanzwe</th> -->
+        <th></th>
+        
       </tr>
     </thead>
     <tbody>
@@ -22,11 +22,9 @@
           </td>
           
           <td class="align-middle">
-            {{ board.topics.count }}
+            <small>ibibazo: <b>{{ board.topics.count }}</b></small>
           </td>
-          <!--<td class="align-middle">
-            {{ board.get_posts_count }}
-          </td>-->
+          
           
         </tr>
       {% endfor %}

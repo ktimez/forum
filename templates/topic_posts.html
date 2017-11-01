@@ -18,15 +18,15 @@
 
     
     <br>
-    <a href="{% url 'reply_topic' topic.category.pk topic.pk %}" class="btn btn-primary" role="button">Mufashe umuhe igisubizo</a>
+    <a href="{% url 'reply_topic' topic.category.pk topic.pk %}" class="btn btn-outline-primary" role="button">Mufashe umuhe igisubizo</a>
   </div>
   <br>
   {% if topic.replies.all %}
-    <h5><b><i><u>mu Bisubizo Bimaze Gutangwa </u></b></i></h5>
+    <h5  style="font-family:'Special Elite';"><b><i><u>mu Bisubizo Bimaze Gutangwa </u></b></i></h5>
   {% endif %}
     
   {% for post in topic.replies.all %}
-    <div class="card mb-2 ">
+    <div class="card border-primary mb-2 ">
       <div class="card-body p-3">
         <div class="row">
           
